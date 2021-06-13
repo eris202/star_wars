@@ -80,7 +80,6 @@ function App() {
             getSelectedMovieCharacter({ selectedId });
           } else {
             setCharacterInformation(null);
-            console.log("true");
           }
         })
         .catch((err) => {
@@ -93,7 +92,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("gogo");
     getSelectedMovieCharacter({ selectedId: selectedMovieId });
   }, [state.characters]);
 
@@ -131,7 +129,6 @@ function App() {
 
   return (
     <>
-      {console.log(state)}
       <div className="container-fluid">
         <div className="row above-the-fold-design">
           <div className={`col-md-${expandDataSpace ? "3" : "6"}`}>
@@ -162,20 +159,20 @@ function App() {
             )}
             {state.films.results && (
               <div className="row">
-                <h3 className="text-center">
+                <h3 className="text-center pt-5">
                   Select your desired movie to see details.
                 </h3>
                 <div className="col-12 text-center">
                   {" "}
                   <Select
-                    className="col-md-10 mt-4"
+                    className="col-md-10 col-11 mt-4"
                     onChange={handleChange}
                     placeholder="Select movie"
                     options={state.films.results ? state.films.results : null}
                   />
                   {expandDataSpace && (
                     <>
-                      <div className="container-tv col-10 mx-auto">
+                      <div className="container-tv col-md-10 col-11 mx-auto">
                         <div className="tv mt-4">
                           {" "}
                           <marquee
@@ -191,6 +188,7 @@ function App() {
                       </div>
                       <div className="col-md-10 col-11 mt-5 mx-auto">
                         <Table data={characterInformation} />
+                        <div className="position-relative py-5"></div>
                       </div>
                     </>
                   )}

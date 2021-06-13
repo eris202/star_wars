@@ -115,3 +115,16 @@ textarea,
   background-color: #2c3034;
   color: #fff;
 }
+
+@media (max-width: 767px) {
+  .above-the-fold-design > div:nth-child(1) {
+    height: 150px;
+  }
+  .above-the-fold-design > div:nth-child(1) img {
+    width: 60%;
+  }
+  .above-the-fold-design > div:nth-child(2) {
+    /* height: auto; */
+    /* overflow: hidden; */
+  }
+}

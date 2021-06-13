@@ -2,20 +2,13 @@ import React, { useState, useEffect } from "react";
 import ArrowDown from "../Assets/sort-down.png";
 import TablePreload from "./preload.js/table";
 export default function Table({ data, Thead }) {
-  const [initialData, setInitialData] = useState(data);
+  const [initialData, setInitialData] = useState([data, { sortTimes: 0 }]);
   const [tableData, setTableData] = useState(data);
-  const [ageTotal, setAgeTotal] = useState(0);
-  const [lastItemIndex, setLastItemIndex] = useState(0);
   const [start, setStart] = React.useState(0);
   const [end, setEnd] = React.useState(10);
   const [increaseIntrvl, setIncreaseIntrvl] = React.useState(10);
-  const [dataToUse, setData] = React.useState(data);
-  const [clickedIndex, setClickedIndex] = useState();
-  const [paginateBy, setPaginateBy] = useState(10);
   const [nameSorted, setNameSorted] = useState(false);
   const [heightSorted, setHeightSorted] = useState(false);
-
-  // console.log(data && data[0], "initial");
 
   let totalHeight = 0;
 
@@ -23,19 +16,16 @@ export default function Table({ data, Thead }) {
 
   useEffect(() => {
     if (data) {
-      setInitialData(data);
-      console.log(data, "Saka");
-      // setTableData(data.slice(start, end));
+      setInitialData((prev) => [data, { sortTimes: prev[1].sortTimes }]);
     }
   }, [data]);
 
   React.useEffect(() => {
-    console.log("initial data is", initialData);
-    if (initialData && initialData.length) {
+    if (initialData[0] && initialData[0].length) {
       setTableData(
-        initialData.slice(
-          start > initialData.length ? 0 : start,
-          end <= initialData.length ? end : initialData.length
+        initialData[0].slice(
+          start > initialData[0].length ? 0 : start,
+          end <= initialData[0].length ? end : initialData[0].length
         )
       );
     }
@@ -56,29 +46,30 @@ export default function Table({ data, Thead }) {
 
   // filter
   const sortBy = (thead, index) => {
-    setClickedIndex(index);
     if (thead === "Name") {
-      console.log(initialData, "initial Data is after updated");
-      const a = initialData.sort((a, b) =>
+      const nameData = initialData[0].sort((a, b) =>
         !nameSorted
           ? a.name[0].localeCompare(b.name[0])
           : b.name[0].localeCompare(a.name[0])
       );
 
-      console.log(a, "Alimi");
-      setInitialData(a);
-      // console.log(tableData[0]);
+      setInitialData((prev) => [
+        nameData,
+        { sortTimes: prev[1].sortTimes + 1 },
+      ]);
 
       setNameSorted(!nameSorted);
     }
     if (thead === "Height") {
       // sort by height
-      setInitialData(
-        initialData.sort((a, b) =>
-          !heightSorted ? a.height[0] - b.height[0] : b.height[0] - a.height[0]
-        )
+      const heightData = initialData[0].sort((a, b) =>
+        !heightSorted ? a.height[0] - b.height[0] : b.height[0] - a.height[0]
       );
-      // console.log(tableData[0]);
+
+      setInitialData((prev) => [
+        heightData,
+        { sortTimes: prev[1].sortTimes + 1 },
+      ]);
 
       setHeightSorted(!heightSorted);
     }
@@ -100,18 +91,30 @@ export default function Table({ data, Thead }) {
   const handleGenderFilter = (e) => {
     switch (e.target.value) {
       case "n/a":
-        setInitialData(genderFilterHandler("n/a"));
+        setInitialData((prev) => [
+          genderFilterHandler("n/a"),
+          { sortTimes: prev[1].sortTimes + 1 },
+        ]);
         break;
       case "male":
-        setInitialData(genderFilterHandler("male"));
+        setInitialData((prev) => [
+          genderFilterHandler("male"),
+          { sortTimes: prev[1].sortTimes + 1 },
+        ]);
         break;
 
       case "female":
-        setInitialData(genderFilterHandler("female"));
+        setInitialData((prev) => [
+          genderFilterHandler("female"),
+          { sortTimes: prev[1].sortTimes + 1 },
+        ]);
         break;
 
       case "default":
-        setInitialData(genderFilterHandler("default"));
+        setInitialData((prev) => [
+          genderFilterHandler("default"),
+          { sortTimes: prev[1].sortTimes + 1 },
+        ]);
         break;
 
       default:
