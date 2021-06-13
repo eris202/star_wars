@@ -31,7 +31,7 @@ function App() {
     setError(false);
 
     axios
-      .get(BASE_URL)
+      .get(`https://api.allorigins.win/raw?url=${BASE_URL}`)
       .then((res) => {
         dispatch(add_films(res.data));
         setError(false);
