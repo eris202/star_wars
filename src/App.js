@@ -161,7 +161,7 @@ function App() {
             {state.films.results && (
               <div className="row">
                 <h3 className="text-center pt-5">
-                  Select your desired movie to see details.
+                  Select your desire movie to see details.
                 </h3>
                 <div className="col-12 text-center">
                   {" "}
