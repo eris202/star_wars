@@ -1,17 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "./App.css";
+import { ToastContainer } from "material-react-toastify";
+import "material-react-toastify/dist/ReactToastify.css";
+import { AlertHook } from "./Hook/alert";
+
+// import("custom-env").env();
+// import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AlertHook>
+      <ToastContainer position={"bottom-left"} />
+      <App />
+    </AlertHook>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
