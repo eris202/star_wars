@@ -10,6 +10,7 @@ export default function Table({ data, Thead }) {
   const [increaseIntrvl, setIncreaseIntrvl] = React.useState(10);
   const [nameSorted, setNameSorted] = useState(false);
   const [heightSorted, setHeightSorted] = useState(false);
+  const OneFoot = 0.0328084; //Foot to centimeter
 
   let totalHeight = 0;
 
@@ -133,6 +134,14 @@ export default function Table({ data, Thead }) {
         break;
     }
   };
+
+  const runConvertion = (num) => {
+    const getLength = num / 2.54;
+    const getFeet = Math.floor(getLength / 12);
+    const getInches = (getLength - 12 * getFeet).toFixed(2);
+
+    return getFeet + "ft/" + getInches + "in";
+  };
   return (
     <div>
       <div className="float-end d-inline-block">
@@ -195,7 +204,11 @@ export default function Table({ data, Thead }) {
                 <th scope="row">T/A</th>
                 <td></td>
                 <td></td>
-                <td className="text-center">{totalHeight}</td>
+                <td className="text-center">
+                  {totalHeight + "" + "CM"}
+                  {" " + " "}
+                  {"(" + runConvertion(totalHeight) + ")"}
+                </td>
               </tr>
             )}
           </tbody>
