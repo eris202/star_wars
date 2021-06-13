@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArrowDown from "../Assets/sort-down.png";
+import { Button } from "./button";
 import TablePreload from "./preload.js/table";
 export default function Table({ data, Thead }) {
   const [initialData, setInitialData] = useState([data, { sortTimes: 0 }]);
@@ -21,6 +22,11 @@ export default function Table({ data, Thead }) {
   }, [data]);
 
   React.useEffect(() => {
+    setEnd(10);
+    setStart(0);
+  }, [initialData]);
+
+  React.useEffect(() => {
     if (initialData[0] && initialData[0].length) {
       setTableData(
         initialData[0].slice(
@@ -39,7 +45,13 @@ export default function Table({ data, Thead }) {
   };
 
   const handleNext = () => {
-    if (end == initialData.length || tableData.length < 10) return;
+    if (
+      end == (initialData[0] && initialData[0].length) ||
+      tableData.length < 10
+      // ||
+      // end + increaseIntrvl > initialData.length
+    )
+      return;
     setStart(end);
     setEnd(end + increaseIntrvl);
   };
@@ -133,7 +145,7 @@ export default function Table({ data, Thead }) {
         </select>
       </div>
       <table
-        style={{ color: "yellow" }}
+        style={{ color: "yellow", margin: 0 }}
         className="table table-demo table-striped table-dark"
       >
         <thead>
@@ -159,6 +171,7 @@ export default function Table({ data, Thead }) {
         <tbody>
           {tableData &&
             tableData.map((tables, index) => {
+              if (isNaN(tables.height)) tables.height = 0;
               totalHeight = totalHeight + parseInt(tables.height);
               return (
                 <tr key={tables.name}>
@@ -175,21 +188,30 @@ export default function Table({ data, Thead }) {
                 </tr>
               );
             })}
-          <tr>
-            <th scope="row">T/A</th>
-            <td></td>
-            <td></td>
-            <td>{totalHeight}</td>
-          </tr>
+
+          {tableData && data && (
+            <tr>
+              <th scope="row">T/A</th>
+              <td></td>
+              <td></td>
+              <td className="text-center">{totalHeight}</td>
+            </tr>
+          )}
         </tbody>
       </table>
-      <div className="navContainer">
+      {(!tableData || !data) && <TablePreload />}
+      {/* 170 cm (5ft/6.93in) */}
+      <div className="navContainer mt-3">
         {initialData && (
-          <button
+          <Button
+            disabled={
+              end == (initialData[0] && initialData[0].length) ||
+              (tableData && tableData.length < 10)
+            }
             className="btn float-end me-2"
             style={{
               cursor: `${
-                end == initialData.length ||
+                end == (initialData[0] && initialData[0].length) ||
                 (tableData && tableData.length) < 10
                   ? "no-drop"
                   : "pointer"
@@ -198,23 +220,17 @@ export default function Table({ data, Thead }) {
             onClick={handleNext}
           >
             Next
-          </button>
+          </Button>
         )}
-        <button
+        <Button
+          disabled={start == 0}
           className="btn float-end me-2"
           style={{ cursor: `${start === 0 ? "no-drop" : "pointer"}` }}
           onClick={handlePrevious}
         >
           Previous
-        </button>
+        </Button>
       </div>
-
-      {!tableData ||
-        (!data && (
-          <>
-            <TablePreload />
-          </>
-        ))}
     </div>
   );
 }

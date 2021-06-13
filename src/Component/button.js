@@ -1,10 +1,17 @@
 import React from "react";
 import propTypes from "prop-types/";
 
-export const Button = ({ type, className, children, loading, ...props }) => {
+export const Button = ({
+  type,
+  disabled,
+  className,
+  children,
+  loading,
+  ...props
+}) => {
   return (
     <button
-      disabled={loading}
+      disabled={disabled}
       className={`btn-${type} btn ${className ? className : ""}`}
       {...props}
     >

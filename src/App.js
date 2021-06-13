@@ -41,10 +41,8 @@ function App() {
       })
       .catch((err) => {
         alert.error("Something went wrong !!!");
-        setTimeout(() => {
-          setPageLoaded(true);
-          setError(true);
-        }, 2000);
+        setPageLoaded(true);
+        setError(true);
       });
   }, []);
 
