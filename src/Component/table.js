@@ -134,7 +134,7 @@ export default function Table({ data, Thead }) {
       </div>
       <table
         style={{ color: "yellow" }}
-        class="table table-demo table-striped table-dark"
+        className="table table-demo table-striped table-dark"
       >
         <thead>
           <tr>

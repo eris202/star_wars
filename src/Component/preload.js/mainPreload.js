@@ -5,11 +5,11 @@ export default function MainPreload({ msg }) {
   return (
     <div className="cover">
       <div className="bg">
-        <div class="preload-container">
-          <div class="dash uno"></div>
-          <div class="dash dos"></div>
-          <div class="dash tres"></div>
-          <div class="dash cuatro"></div>
+        <div className="preload-container">
+          <div className="dash uno"></div>
+          <div className="dash dos"></div>
+          <div className="dash tres"></div>
+          <div className="dash cuatro"></div>
         </div>
       </div>
       {/* 
