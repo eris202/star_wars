@@ -144,7 +144,7 @@ export default function Table({ data, Thead }) {
           <option value="female">female</option>
         </select>
       </div>
-      <div className="table-reponsive col-12">
+      <div className="table-responsive col-12">
         <table
           style={{ color: "yellow", margin: 0 }}
           className="table table-demo table-striped table-dark"
