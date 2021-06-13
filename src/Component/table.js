@@ -144,92 +144,97 @@ export default function Table({ data, Thead }) {
           <option value="female">female</option>
         </select>
       </div>
-      <table
-        style={{ color: "yellow", margin: 0 }}
-        className="table table-demo table-striped table-dark"
-      >
-        <thead>
-          <tr>
-            <th>S/N </th>
-            <th onClick={() => sortBy("Name")}>
-              Name{" "}
-              <img
-                style={{ width: "10px", cursor: "pointer" }}
-                src={ArrowDown}
-              />{" "}
-            </th>
-            <th>Gender </th>
-            <th onClick={() => sortBy("Height")}>
-              Height{" "}
-              <img
-                style={{ width: "10px", cursor: "pointer" }}
-                src={ArrowDown}
-              />{" "}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData &&
-            tableData.map((tables, index) => {
-              if (isNaN(tables.height)) tables.height = 0;
-              totalHeight = totalHeight + parseInt(tables.height);
-              return (
-                <tr key={tables.name}>
-                  <th scope="row">{start + index + 1}</th>
-                  <td>{tables.name}</td>
-                  <td>
-                    {tables.gender == "male"
-                      ? "M"
-                      : tables.gender == "female"
-                      ? "F"
-                      : tables.gender}
-                  </td>
-                  <td> {tables.height}</td>
-                </tr>
-              );
-            })}
-
-          {tableData && data && (
+      <div className="table-reponsive col-12">
+        <table
+          style={{ color: "yellow", margin: 0 }}
+          className="table table-demo table-striped table-dark"
+        >
+          <thead>
             <tr>
-              <th scope="row">T/A</th>
-              <td></td>
-              <td></td>
-              <td className="text-center">{totalHeight}</td>
+              <th>S/N </th>
+              <th onClick={() => sortBy("Name")}>
+                Name{" "}
+                <img
+                  style={{ width: "10px", cursor: "pointer" }}
+                  src={ArrowDown}
+                />{" "}
+              </th>
+              <th>Gender </th>
+              <th onClick={() => sortBy("Height")}>
+                Height{" "}
+                <img
+                  style={{ width: "10px", cursor: "pointer" }}
+                  src={ArrowDown}
+                />{" "}
+              </th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tableData &&
+              tableData.map((tables, index) => {
+                if (isNaN(tables.height)) tables.height = 0;
+                totalHeight = totalHeight + parseInt(tables.height);
+                return (
+                  <tr key={tables.name}>
+                    <th scope="row">{start + index + 1}</th>
+                    <td>{tables.name}</td>
+                    <td>
+                      {tables.gender == "male"
+                        ? "M"
+                        : tables.gender == "female"
+                        ? "F"
+                        : tables.gender}
+                    </td>
+                    <td> {tables.height}</td>
+                  </tr>
+                );
+              })}
+
+            {tableData && data && (
+              <tr>
+                <th scope="row">T/A</th>
+                <td></td>
+                <td></td>
+                <td className="text-center">{totalHeight}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
       {(!tableData || !data) && <TablePreload />}
       {/* 170 cm (5ft/6.93in) */}
       <div className="navContainer mt-3">
-        {initialData && (
-          <Button
-            disabled={
-              end == (initialData[0] && initialData[0].length) ||
-              (tableData && tableData.length < 10)
-            }
-            className="btn float-end me-2"
-            style={{
-              cursor: `${
+        {tableData && (
+          <>
+            <Button
+              disabled={
                 end == (initialData[0] && initialData[0].length) ||
-                (tableData && tableData.length) < 10
-                  ? "no-drop"
-                  : "pointer"
-              }`,
-            }}
-            onClick={handleNext}
-          >
-            Next
-          </Button>
+                (tableData && tableData.length < 10)
+              }
+              className="btn float-end me-2"
+              style={{
+                cursor: `${
+                  end == (initialData[0] && initialData[0].length) ||
+                  (tableData && tableData.length) < 10
+                    ? "no-drop"
+                    : "pointer"
+                }`,
+              }}
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+
+            <Button
+              disabled={start == 0}
+              className="btn float-end me-2"
+              style={{ cursor: `${start === 0 ? "no-drop" : "pointer"}` }}
+              onClick={handlePrevious}
+            >
+              Previous
+            </Button>
+          </>
         )}
-        <Button
-          disabled={start == 0}
-          className="btn float-end me-2"
-          style={{ cursor: `${start === 0 ? "no-drop" : "pointer"}` }}
-          onClick={handlePrevious}
-        >
-          Previous
-        </Button>
       </div>
     </div>
   );

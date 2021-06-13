@@ -81,8 +81,11 @@ function App() {
           }
         })
         .catch((err) => {
+          console.log(index + 1, getLength);
           if (index + 1 === getLength) {
-            alert.error("Something went wrong");
+            alert.error(
+              "Something went wrong!!! Check your internet or Refresh the page"
+            );
           }
           // alert.error("index");
         });
