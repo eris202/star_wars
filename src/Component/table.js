@@ -10,6 +10,7 @@ export default function Table({ data, Thead }) {
   const [increaseIntrvl, setIncreaseIntrvl] = React.useState(10);
   const [nameSorted, setNameSorted] = useState(false);
   const [heightSorted, setHeightSorted] = useState(false);
+  const [selectValue, setSelectValue] = useState("default");
   const OneFoot = 0.0328084; //Foot to centimeter
 
   let totalHeight = 0;
@@ -20,6 +21,7 @@ export default function Table({ data, Thead }) {
     if (data) {
       setInitialData((prev) => [data, { sortTimes: prev[1].sortTimes }]);
     }
+    setSelectValue("default");
   }, [data]);
 
   React.useEffect(() => {
@@ -102,6 +104,8 @@ export default function Table({ data, Thead }) {
   };
 
   const handleGenderFilter = (e) => {
+    setSelectValue(e.target.value);
+
     switch (e.target.value) {
       case "n/a":
         setInitialData((prev) => [
@@ -146,7 +150,11 @@ export default function Table({ data, Thead }) {
     <div>
       <div className="float-end d-inline-block">
         Filter
-        <select onChange={handleGenderFilter} style={{ cursor: "pointer" }}>
+        <select
+          value={selectValue}
+          onChange={handleGenderFilter}
+          style={{ cursor: "pointer" }}
+        >
           <option value="default">default</option>
           <option value="n/a">n/a</option>
           <option value="male">male</option>
