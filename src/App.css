@@ -92,7 +92,12 @@ textarea,
   outline: none !important;
   border: none !important;
 }
-
+.fetch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .btn-no-bg-inline:focus {
   box-shadow: none !important;
 }

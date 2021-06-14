@@ -172,18 +172,25 @@ function App() {
                   />
                   {expandDataSpace && (
                     <>
-                      <div className="container-tv col-md-10 col-11 mx-auto">
-                        <div className="tv mt-4">
+                      <div className="container-tv col-md-10 col-11 mx-auto position-relative">
+                        <div className="tv mt-4 position-relative">
                           {" "}
-                          <marquee
-                            className="mx-auto col-10"
-                            behavior="scroll"
-                            direction="up"
-                            scrolldelay="150"
-                          >
-                            {" "}
-                            {selectedMovie[0] && selectedMovie[0].opening_crawl}
-                          </marquee>
+                          {characterInformation ? (
+                            <marquee
+                              className="mx-auto col-10"
+                              behavior="scroll"
+                              direction="up"
+                              scrolldelay="150"
+                            >
+                              {" "}
+                              {selectedMovie[0] &&
+                                selectedMovie[0].opening_crawl}
+                            </marquee>
+                          ) : (
+                            <div className="mt-3 text-center fetch">
+                              Fetching ....
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-10 col-11 mt-5 mx-auto">
