@@ -187,7 +187,8 @@ export default function Table({ data, Thead }) {
             </tr>
           </thead>
           <tbody>
-            {tableData &&
+            {data &&
+              tableData &&
               tableData.map((tables, index) => {
                 if (isNaN(tables.height)) tables.height = 0;
                 totalHeight = totalHeight + parseInt(tables.height);
@@ -225,7 +226,7 @@ export default function Table({ data, Thead }) {
       {(!tableData || !data) && <TablePreload />}
       {/* 170 cm (5ft/6.93in) */}
       <div className="navContainer mt-3">
-        {tableData && (
+        {data && tableData && (
           <>
             <Button
               disabled={
