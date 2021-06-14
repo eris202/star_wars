@@ -151,6 +151,7 @@ export default function Table({ data, Thead }) {
       <div className="float-end d-inline-block">
         Filter
         <select
+          disabled={!tableData || !data}
           value={selectValue}
           onChange={handleGenderFilter}
           style={{ cursor: "pointer" }}
@@ -169,20 +170,29 @@ export default function Table({ data, Thead }) {
           <thead>
             <tr>
               <th>S/N </th>
-              <th onClick={() => sortBy("Name")}>
-                Name{" "}
-                <img
-                  style={{ width: "10px", cursor: "pointer" }}
-                  src={ArrowDown}
-                />{" "}
+              <th className="thToclick">
+                <Button
+                  disabled={!tableData || !data}
+                  type="no-bg-inline"
+                  onClick={() => sortBy("Name")}
+                >
+                  Name{" "}
+                  <img className={nameSorted ? "rotate" : ""} src={ArrowDown} />{" "}
+                </Button>{" "}
               </th>
               <th>Gender </th>
-              <th onClick={() => sortBy("Height")}>
-                Height{" "}
-                <img
-                  style={{ width: "10px", cursor: "pointer" }}
-                  src={ArrowDown}
-                />{" "}
+              <th className="thToclick">
+                <Button
+                  disabled={!tableData || !data}
+                  onClick={() => sortBy("Height")}
+                  type="no-bg-inline"
+                >
+                  Height{" "}
+                  <img
+                    className={heightSorted ? "rotate" : ""}
+                    src={ArrowDown}
+                  />{" "}
+                </Button>{" "}
               </th>
             </tr>
           </thead>

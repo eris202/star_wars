@@ -2,7 +2,6 @@
 import { useReducer, useEffect, useState } from "react";
 import { reducerFunction } from "./Reducer/reducer";
 import { add_films, addToXters, add_to_xters } from "./Actions/action";
-import "bootstrap/dist/css/bootstrap.css";
 import Logo from "./Assets/logo.png";
 import useALert from "./Hook/alert";
 import { Button } from "./Component/button";

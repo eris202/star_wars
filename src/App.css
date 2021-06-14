@@ -83,6 +83,19 @@ textarea,
   left: 45%;
 }
 
+.btn-no-bg-inline {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.btn-no-bg-inline:focus {
+  box-shadow: none !important;
+}
 .container-tv::before {
   position: absolute;
   content: "";
@@ -116,6 +129,17 @@ textarea,
   color: #fff;
 }
 
+.thToclick {
+  cursor: pointer;
+}
+.thToclick img {
+  width: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.thToclick .rotate {
+  transform: rotate(180deg);
+}
 @media (max-width: 767px) {
   .above-the-fold-design > div:nth-child(1) {
     height: 25vh;
