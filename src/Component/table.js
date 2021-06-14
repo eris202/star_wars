@@ -22,6 +22,8 @@ export default function Table({ data, Thead }) {
       setInitialData((prev) => [data, { sortTimes: prev[1].sortTimes }]);
     }
     setSelectValue("default");
+    setNameSorted(false);
+    setHeightSorted(false);
   }, [data]);
 
   React.useEffect(() => {
